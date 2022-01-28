@@ -4,8 +4,8 @@ import com.example.lottieapp.data.local.BlogsEntity
 
 sealed class ViewState {
     object Loading: ViewState()
-    object Error: ViewState()
+    data class Error(val throwable: Throwable): ViewState()
     data class Loaded(
-        val blogs: List<BlogsEntity>
+        val blogs: List<BlogsEntity> = listOf()
     ): ViewState()
 }

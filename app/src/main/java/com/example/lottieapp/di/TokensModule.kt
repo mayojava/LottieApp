@@ -2,6 +2,7 @@ package com.example.lottieapp.di
 
 import com.example.lottieapp.BuildConfig
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
@@ -10,6 +11,7 @@ import javax.inject.Named
 @InstallIn(SingletonComponent::class)
 object TokensModule {
     @Named("tokens")
+    @Provides
     fun provideTokensMap(): Map<String, String> {
         return mapOf(
             KEY_FEATURED to BuildConfig.FEATURED_TOKEN,

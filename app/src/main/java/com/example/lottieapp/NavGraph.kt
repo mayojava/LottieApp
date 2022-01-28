@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.lottieapp.ui.home.LottieAnimationHome
 import com.example.lottieapp.ui.viewmodel.HomeViewModel
 
 @Composable
@@ -19,6 +20,7 @@ fun NavGraph(
     ) {
         composable(route = Destinations.Home.route) {
             val viewModel = hiltViewModel<HomeViewModel>()
+            LottieAnimationHome(viewModel)
         }
     }
 }

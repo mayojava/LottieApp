@@ -7,17 +7,17 @@ import retrofit2.http.Query
 
 interface LottieAnimApi {
     @GET("featuredAnimations.json")
-    fun featured(@Query("token") token: String): Response<ApiResponse<Featured>>
+    suspend fun featured(@Query("token") token: String): Response<ApiResponse<Featured>>
 
     @GET("popularAnimations.json")
-    fun popular(@Query("token") token: String): Response<ApiResponse<Popular>>
+    suspend fun popular(@Query("token") token: String): Response<ApiResponse<Popular>>
 
     @GET("recentAnimations.json")
-    fun recent(@Query("token") token: String): Response<ApiResponse<Recent>>
+    suspend fun recent(@Query("token") token: String): Response<ApiResponse<Recent>>
 
     @GET("featuredAnimators.json")
-    fun animators(@Query("token") token: String): Response<ApiResponse<Animators>>
+    suspend fun animators(@Query("token") token: String): Response<ApiResponse<Animators>>
 
     @GET("blogs.json")
-    fun blogs(@Query("token") token: String): Response<ApiResponse<Blogs>>
+    suspend fun blogs(@Query("token") token: String): Response<ApiResponse<Blogs>>
 }

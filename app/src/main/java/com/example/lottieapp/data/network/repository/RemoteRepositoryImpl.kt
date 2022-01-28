@@ -20,7 +20,7 @@ class RemoteRepositoryImpl @Inject constructor(
     private val internetConnectivityManager: InternetConnectivityManager,
     @Named("tokens") private val tokens: Map<String, String>
 ): RemoteRepository {
-    private suspend fun <T> execute(request: () -> Response<ApiResponse<T>>): Result<T> {
+    private suspend fun <T> execute(request: suspend () -> Response<ApiResponse<T>>): Result<T> {
         val isConnected = internetConnectivityManager.hasInternetConnectivity()
         return if (isConnected) {
             val response = request.invoke()
@@ -71,7 +71,7 @@ class RemoteRepositoryImpl @Inject constructor(
     }
 
     private suspend fun <T> fetchAndSave(
-        remoteCall: () -> Response<ApiResponse<T>>,
+        remoteCall: suspend () -> Response<ApiResponse<T>>,
         saveCall: suspend (result: Result<T>) -> Unit
     ) {
         withContext(appDispatchers.ioDispatcher) {

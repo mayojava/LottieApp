@@ -1,3 +1,5 @@
+import com.example.lottieapp.buildsrc.Libs
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -61,38 +63,40 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation Libs.AndroidX.coreKtx
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation Libs.Coroutines.android
+    implementation Libs.Coroutines.core
 
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation "androidx.compose.runtime:runtime:$compose_version"
-    implementation "androidx.compose.foundation:foundation-layout:$compose_version"
-    implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation "androidx.compose.foundation:foundation:$compose_version"
-    implementation "androidx.compose.animation:animation:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    implementation Libs.AndroidX.Compose.ui
+    implementation Libs.AndroidX.Compose.material
+    implementation Libs.AndroidX.Compose.runtime
+    implementation Libs.AndroidX.Compose.layout
+    implementation Libs.AndroidX.Compose.iconsExtended
+    implementation Libs.AndroidX.Compose.foundation
+    implementation Libs.AndroidX.Compose.animation
+    implementation Libs.AndroidX.Compose.tooling
+    implementation Libs.AndroidX.Compose.tooling_preview
+    implementation Libs.AndroidX.Compose.runtime_livedata
 
-    implementation 'androidx.navigation:navigation-compose:2.4.0-rc01'
+    implementation Libs.AndroidX.navigation
 
-    implementation "com.google.accompanist:accompanist-placeholder:$accompanist_version"
-    implementation "com.google.accompanist:accompanist-insets:$accompanist_version"
-    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+    implementation Libs.Accompanist.placeholder
+    implementation Libs.Accompanist.insets
+    implementation Libs.Accompanist.systemui
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+    implementation Libs.Coil.coilCompose
 
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle"
+    implementation Libs.AndroidX.Lifecycle.viewmodel
+    implementation Libs.AndroidX.Lifecycle.viewmodel_savedstate
+    implementation Libs.AndroidX.Lifecycle.runtime_ktx
+    implementation Libs.AndroidX.Lifecycle.livedata
+    implementation Libs.AndroidX.Lifecycle.viewmodel_compose
 
-    implementation "androidx.activity:activity-compose:$activity_compose"
-    implementation "androidx.activity:activity-ktx:$activity_compose"
+    implementation Libs.AndroidX.Activity.activity_compose
+    implementation Libs.AndroidX.Activity.activity_ktx
 
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
