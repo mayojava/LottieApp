@@ -20,10 +20,10 @@ are made.
 JUnit is used to test the RemoteRepository and the Repository that wraps the remote and local sources.
 
 ## Running the App
-Ensure you have the following in local.properties
-featured.api.token={REPLACE WITH TOKEN FROM THE API URL}
-popular.api.token={REPLACE WITH TOKEN FROM THE API URL}
-recent.api.token={REPLACE WITH TOKEN FROM THE API URL}
-animators.api.token={REPLACE WITH TOKEN FROM THE API URL}
-blogs.api.token={REPLACE WITH TOKEN FROM THE API URL}
-base.url=https://firebasestorage.googleapis.com/v0/b/lottiefiles-test.appspot.com/o/
+* Ensure you have the following in local.properties
+* featured.api.token={REPLACE WITH TOKEN FROM THE API URL}
+* popular.api.token={REPLACE WITH TOKEN FROM THE API URL}
+* recent.api.token={REPLACE WITH TOKEN FROM THE API URL}
+* animators.api.token={REPLACE WITH TOKEN FROM THE API URL}
+* blogs.api.token={REPLACE WITH TOKEN FROM THE API URL}
+* base.url=https://firebasestorage.googleapis.com/v0/b/lottiefiles-test.appspot.com/o/
