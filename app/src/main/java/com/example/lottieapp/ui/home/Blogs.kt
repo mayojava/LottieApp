@@ -59,7 +59,7 @@ fun BlogItem(
                 )
 
                 Text(
-                    text = blog.postedAt,
+                    text = blog.postedAt.split("T").first(),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.body2

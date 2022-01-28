@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
                 .collect {
                     _viewState.value =
                         _viewState.value.copy(
-                            isLoading = false,
+                            isLoading = it.isEmpty(),
                             data = _viewState.value.data.copy(blogs = it)
                         )
                 }
@@ -40,7 +40,7 @@ class HomeViewModel @Inject constructor(
                 .collect {
                     _viewState.value =
                         _viewState.value.copy(
-                            isLoading = false,
+                            isLoading = it.isEmpty(),
                             data = _viewState.value.data.copy(animators = it)
                         )
                 }
@@ -53,7 +53,7 @@ class HomeViewModel @Inject constructor(
                 .collect {
                     _viewState.value =
                         _viewState.value.copy(
-                            isLoading = false,
+                            isLoading = it.isEmpty(),
                             data = _viewState.value.data.copy(popularAnimations = it)
                         )
                 }
@@ -66,7 +66,7 @@ class HomeViewModel @Inject constructor(
                 .collect {
                     _viewState.value =
                         _viewState.value.copy(
-                            isLoading = false,
+                            isLoading = it.isEmpty(),
                             data = _viewState.value.data.copy(recentAnimations = it)
                         )
                 }
@@ -79,7 +79,7 @@ class HomeViewModel @Inject constructor(
                 .collect {
                     _viewState.value =
                         _viewState.value.copy(
-                            isLoading = false,
+                            isLoading = it.isEmpty(),
                             data = _viewState.value.data.copy(featuredAnimations = it)
                         )
                 }
