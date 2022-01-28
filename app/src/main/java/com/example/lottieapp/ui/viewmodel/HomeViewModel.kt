@@ -12,17 +12,77 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val lottieAnimRepository: LottieAnimRepository
+    factory: LottieAnimRepository.Factory
 ): ViewModel() {
-    private val _viewState = MutableStateFlow<ViewState>(ViewState.Loading)
+    private val _viewState = MutableStateFlow(ViewState(isLoading = true))
     val viewState: StateFlow<ViewState> = _viewState
 
     init {
+        val lottieAnimRepository = factory.create(viewModelScope)
+
         viewModelScope.launch {
             lottieAnimRepository
                 .getBlogs()
-                .catch { _viewState.value = ViewState.Error(it) }
-                .collect { _viewState.value = ViewState.Loaded().copy(blogs = it) }
+                .catch { _viewState.value = _viewState.value.copy(error = it) }
+                .collect {
+                    _viewState.value =
+                        _viewState.value.copy(
+                            isLoading = false,
+                            data = _viewState.value.data.copy(blogs = it)
+                        )
+                }
+        }
+
+        viewModelScope.launch {
+            lottieAnimRepository
+                .getAnimators()
+                .catch { _viewState.value = _viewState.value.copy(error = it) }
+                .collect {
+                    _viewState.value =
+                        _viewState.value.copy(
+                            isLoading = false,
+                            data = _viewState.value.data.copy(animators = it)
+                        )
+                }
+        }
+
+        viewModelScope.launch {
+            lottieAnimRepository
+                .getPopularAnimations()
+                .catch { _viewState.value = _viewState.value.copy(error = it) }
+                .collect {
+                    _viewState.value =
+                        _viewState.value.copy(
+                            isLoading = false,
+                            data = _viewState.value.data.copy(popularAnimations = it)
+                        )
+                }
+        }
+
+        viewModelScope.launch {
+            lottieAnimRepository
+                .getRecentAnimations()
+                .catch { _viewState.value = _viewState.value.copy(error = it) }
+                .collect {
+                    _viewState.value =
+                        _viewState.value.copy(
+                            isLoading = false,
+                            data = _viewState.value.data.copy(recentAnimations = it)
+                        )
+                }
+        }
+
+        viewModelScope.launch {
+            lottieAnimRepository
+                .getFeaturedAnimations()
+                .catch { _viewState.value = _viewState.value.copy(error = it) }
+                .collect {
+                    _viewState.value =
+                        _viewState.value.copy(
+                            isLoading = false,
+                            data = _viewState.value.data.copy(featuredAnimations = it)
+                        )
+                }
         }
     }
 }

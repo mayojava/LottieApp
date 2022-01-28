@@ -15,13 +15,13 @@ interface LottieAnimationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAnimations(entities: List<AnimationEntity>)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAnimators(animators: List<AnimatorsEntity>) {}
+    suspend fun insertAnimators(animators: List<AnimatorsEntity>)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBlogs(blogs: List<BlogsEntity>)
 
     @Transaction
-    suspend fun deleteAndInsertAnimations(entities: List<AnimationEntity>) {
-        deleteAllAnimations()
+    suspend fun deleteAndInsertAnimations(type: EntityType, entities: List<AnimationEntity>) {
+        deleteAnimations(type = type)
         insertAnimations(entities = entities)
     }
 
@@ -37,8 +37,8 @@ interface LottieAnimationDao {
         insertAnimators(animators = animators)
     }
 
-    @Query("DELETE FROM animation")
-    suspend fun deleteAllAnimations()
+    @Query("DELETE FROM animation where type = :type")
+    suspend fun deleteAnimations(type: EntityType)
     @Query("DELETE FROM blogs")
     suspend fun deleteAllBlogs()
     @Query("DELETE FROM animators")

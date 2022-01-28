@@ -9,8 +9,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.lottieapp.R
 import com.example.lottieapp.data.local.BlogsEntity
 
 @Composable
@@ -21,13 +23,13 @@ fun Blogs(blogs: List<BlogsEntity>) {
     ) {
         Text(
             modifier = Modifier.padding(16.dp),
-            text = "Latest Posts",
-            style = MaterialTheme.typography.h6
+            text = stringResource(id = R.string.latest_posts),
+            style = MaterialTheme.typography.subtitle1
         )
 
-        LazyRow(modifier = Modifier.padding(horizontal = 16.dp)) {
+        LazyRow(modifier = Modifier.padding(end = 16.dp)) {
             items(blogs) { blog ->
-                BlogItem(blog = blog, modifier = Modifier.padding(end = 12.dp))
+                BlogItem(blog = blog, modifier = Modifier.padding(start = 16.dp, bottom = 16.dp))
             }
         }
 
@@ -39,19 +41,31 @@ fun BlogItem(
     blog: BlogsEntity,
     modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier.size(220.dp, 200.dp)) {
-        Column(modifier = Modifier.fillMaxSize()) {
+    Card(modifier = modifier.size(280.dp, 240.dp)) {
+        Column {
             NetworkImage(
                 url = blog.imageUrl,
                 contentDescription = "",
-                modifier = Modifier.size(width = 220.dp, height = 140.dp)
+                modifier = Modifier
+                    .height(140.dp)
+                    .fillMaxWidth()
             )
-            Text(
-                text = blog.title,
-                color = Color.White,
-                style = MaterialTheme.typography.overline,
-                modifier = Modifier.padding(vertical = 8.dp, horizontal = 4.dp)
-            )
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = blog.title,
+                    style = MaterialTheme.typography.h6,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                Text(
+                    text = blog.postedAt,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.body2
+                )
+            }
+
         }
     }
 }

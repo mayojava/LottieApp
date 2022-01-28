@@ -6,8 +6,6 @@ import com.example.lottieapp.data.network.dispatchers.AppDispatchers
 import com.example.lottieapp.data.network.dispatchers.AppDispatchersImpl
 import com.example.lottieapp.data.network.repository.RemoteRepository
 import com.example.lottieapp.data.network.repository.RemoteRepositoryImpl
-import com.example.lottieapp.data.repository.LottieAnimRepository
-import com.example.lottieapp.data.repository.LottieAnimRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,8 +26,4 @@ interface BindersModule {
     @Binds
     @Singleton
     fun bindRemoteRepository(remoteRepositoryImpl: RemoteRepositoryImpl): RemoteRepository
-
-    @Binds
-    @Singleton
-    fun bindLottieAnimRepository(lottieAnimRepository: LottieAnimRepositoryImpl): LottieAnimRepository
 }

@@ -2,6 +2,7 @@ package com.example.lottieapp.data.network.repository
 
 import com.example.lottieapp.data.LottieAnimApi
 import com.example.lottieapp.data.ObjectMapper
+import com.example.lottieapp.data.local.EntityType
 import com.example.lottieapp.data.local.LottieAnimationDao
 import com.example.lottieapp.data.model.*
 import com.example.lottieapp.data.network.connectivity.InternetConnectivityManager
@@ -20,30 +21,45 @@ class RemoteRepositoryImpl @Inject constructor(
     private val internetConnectivityManager: InternetConnectivityManager,
     @Named("tokens") private val tokens: Map<String, String>
 ): RemoteRepository {
-    private suspend fun <T> execute(request: suspend () -> Response<ApiResponse<T>>): Result<T> {
-        val isConnected = internetConnectivityManager.hasInternetConnectivity()
-        return if (isConnected) {
-            val response = request.invoke()
-            if (response.isSuccessful) {
-                Result.success(response.body()!!.data)
-            } else {
-                Result.failure(Throwable(response.errorBody()?.string() ?: ""))
-            }
-        } else {
-            Result.failure(Throwable("No internet connectivity"))
-        }
-    }
-
     override suspend fun updateRecentAnimations() {
-        TODO("Not yet implemented")
+        fetchAndSave(
+            remoteCall = { lottieAnimApi.recent(tokens.getValue(TokensModule.KEY_RECENT)) },
+            saveCall = {
+                val result = it.getOrThrow().recent.results
+                lottieAnimationDao.deleteAndInsertAnimations(
+                    type = EntityType.RECENT,
+                    ObjectMapper.toAnimationDbEntity(EntityType.RECENT, result)
+                )
+            }
+        )
     }
 
     override suspend fun updateFeaturedAnimations() {
-        TODO("Not yet implemented")
+        fetchAndSave(
+            remoteCall = { lottieAnimApi.featured(tokens.getValue(TokensModule.KEY_FEATURED)) },
+            saveCall = {
+                val result = it.getOrThrow().featured.results
+                lottieAnimationDao.deleteAndInsertAnimations(
+                    type = EntityType.FEATURED,
+                    ObjectMapper.toAnimationDbEntity(EntityType.FEATURED, result)
+                )
+            }
+        )
     }
 
     override suspend fun updatePopularAnimations() {
-        TODO("Not yet implemented")
+        fetchAndSave(
+            remoteCall = {
+                lottieAnimApi.popular(tokens.getValue(TokensModule.KEY_POPULAR))
+            },
+            saveCall = {
+                val result = it.getOrThrow().popular.results
+                lottieAnimationDao.deleteAndInsertAnimations(
+                    type = EntityType.POPULAR,
+                    ObjectMapper.toAnimationDbEntity(EntityType.POPULAR, result)
+                )
+            }
+        )
     }
 
     override suspend fun updateAnimators() {
@@ -80,6 +96,20 @@ class RemoteRepositoryImpl @Inject constructor(
             if (response.isSuccess) {
                 saveCall(response)
             }
+        }
+    }
+
+    private suspend fun <T> execute(request: suspend () -> Response<ApiResponse<T>>): Result<T> {
+        val isConnected = internetConnectivityManager.hasInternetConnectivity()
+        return if (isConnected) {
+            val response = request.invoke()
+            if (response.isSuccessful) {
+                Result.success(response.body()!!.data)
+            } else {
+                Result.failure(Throwable(response.errorBody()?.string() ?: ""))
+            }
+        } else {
+            Result.failure(Throwable("No internet connectivity"))
         }
     }
 }

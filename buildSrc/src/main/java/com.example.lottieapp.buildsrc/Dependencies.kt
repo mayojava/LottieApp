@@ -57,5 +57,6 @@ object Libs {
 
     object Coil {
         const val coilCompose = "io.coil-kt:coil-compose:1.4.0"
+        const val coilGif = "io.coil-kt:coil-gif:1.4.0"
     }
 }
