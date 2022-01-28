@@ -27,3 +27,6 @@ JUnit is used to test the RemoteRepository and the Repository that wraps the rem
 * animators.api.token={REPLACE WITH TOKEN FROM THE API URL}
 * blogs.api.token={REPLACE WITH TOKEN FROM THE API URL}
 * base.url=https://firebasestorage.googleapis.com/v0/b/lottiefiles-test.appspot.com/o/
+
+## Screenshot
+![screenshot](/screenshot/screenshot.jpeg)
