@@ -64,8 +64,8 @@ android {
 dependencies {
 
     implementation Libs.AndroidX.coreKtx
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.Google.material
 
     implementation Libs.Coroutines.android
     implementation Libs.Coroutines.core
@@ -99,27 +99,21 @@ dependencies {
     implementation Libs.AndroidX.Activity.activity_compose
     implementation Libs.AndroidX.Activity.activity_ktx
 
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    implementation Libs.AndroidX.Room.room_ktx
+    kapt Libs.AndroidX.Room.room_compiler
 
-    implementation "androidx.room:room-ktx:2.4.1"
-    kapt "androidx.room:room-compiler:2.4.1"
+    implementation Libs.Square.Moshi.moshi_kotlin
+    kapt Libs.Square.Moshi.moshi_kotlin_codegen
 
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation "io.reactivex.rxjava3:rxjava:3.1.2"
+    implementation Libs.Square.OkHttp.okhttp
+    implementation Libs.Square.OkHttp.logging_interceptor
 
-    implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    implementation Libs.Retrofit.retrofit
+    implementation Libs.Retrofit.moshi_converter
 
-    implementation "com.squareup.okhttp3:okhttp:4.9.2"
-
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
-    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
-
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.2"
-
-    implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    implementation Libs.AndroidX.Hilt.hilt_android
+    implementation Libs.AndroidX.Hilt.hilt_navigation_compose
+    kapt Libs.AndroidX.Hilt.hilt_compiler
 
     testImplementation 'junit:junit:4.+'
     testImplementation "com.google.truth:truth:1.1.3"
@@ -127,7 +121,6 @@ dependencies {
 
     testImplementation "androidx.test.ext:junit-ktx:1.1.3"
     testImplementation "androidx.test:core-ktx:1.4.0"
-    testImplementation Libs.Coroutines.android
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

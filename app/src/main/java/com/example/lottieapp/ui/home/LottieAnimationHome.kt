@@ -67,7 +67,7 @@ fun AnimationsHome(state: ViewState) {
 
         if (state.data.featuredAnimations.isNotEmpty()) {
             Animations(
-                stringResource(id = R.string.featured_animators),
+                stringResource(id = R.string.featured_animations),
                 animations = state.data.featuredAnimations
             )
         }
