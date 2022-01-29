@@ -42,7 +42,7 @@ fun Animations(title: String, animations: List<AnimationEntity>) {
                 AnimationItem(
                     animationEntity = animation,
                     modifier = Modifier
-                        .size(width = 240.dp, 280.dp)
+                        .size(width = 240.dp, 240.dp)
                         .padding(start = 16.dp)
                 )
             }
@@ -96,9 +96,7 @@ fun AnimationItem(animationEntity: AnimationEntity, modifier: Modifier = Modifie
                 )
             }
 
-            Surface(modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)) {
+            Surface(modifier = Modifier.fillMaxSize().padding(start = 8.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     NetworkImage(
                         url = animationEntity.createdBy.avatarUrl,
